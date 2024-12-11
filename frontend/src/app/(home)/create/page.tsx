@@ -1,7 +1,7 @@
 import React from 'react'
 import FormFacility from '../components/form-facility'
 
-const CreateAirplanePage = () => {
+const CreateFacilities = () => {
     return (
         <div>
             <div className="flex flex-row items-center justify-between">
@@ -14,4 +14,4 @@ const CreateAirplanePage = () => {
     )
 }
 
-export default CreateAirplanePage
+export default CreateFacilities

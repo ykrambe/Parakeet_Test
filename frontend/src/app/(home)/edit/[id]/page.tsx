@@ -1,28 +1,46 @@
-import React, { FC } from 'react'
-import FormAirplane from '../../components/form-facility'
-import { getAirplanesById } from '../../lib/actions'
+"use client";
+
+import React, { FC, useEffect, useState } from "react";
+import FormEditFacility from "../../components/form-edit-facility";
+import useFormStore from "@/store/formStore";
 
 type Params = {
-    id: string
+  id: string;
+};
+
+interface EditFacilitiesProps {
+  params: Params;
 }
 
-interface EditAirplanePageProps {
-    params: Params
-}
+const EditFacilities: FC<EditFacilitiesProps> = ({ params }) => {
+  const { facility, getFacilityById } = useFormStore((state) => state);
+  const [isLoading, setIsLoading] = useState(true);
 
-const EditAirplanePage: FC<EditAirplanePageProps> = async({params}) => {
-    const data = await getAirplanesById(params.id)
-    return (
-        <div>
-            <div className="flex flex-row items-center justify-between">
-                <div className="my-5 text-2xl font-bold">
-                    Edit Data Airplane
-                </div>
+  useEffect(() => {
+    if (params.id) {
+      setIsLoading(true); // Set loading state
+      getFacilityById(params.id).finally(() => {
+        setIsLoading(false); // Clear loading state after data is fetched
+      });
+    }
+  }, [params.id, getFacilityById]);
 
-            </div>
-            <FormAirplane type="EDIT" defaultValues={data} />
-        </div>
-    )
-}
+  if (isLoading) {
+    return <div>Loading...</div>; // Show loading state
+  }
 
-export default EditAirplanePage
+  return (
+    <div>
+      <div className="flex flex-row items-center justify-between">
+        <div className="my-5 text-2xl font-bold">Edit Data Facility</div>
+      </div>
+      {facility ? (
+        <FormEditFacility type="EDIT" defaultValues={facility} />
+      ) : (
+        <div className="text-red-500">Data not found. Please try again.</div>
+      )}
+    </div>
+  );
+};
+
+export default EditFacilities;

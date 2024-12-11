@@ -80,7 +80,7 @@ const TableFacility = () => {
                   <Button
                     variant="contained"
                     color="primary"
-                    onClick={() => handleEdit(facility.id)}
+                    href={`/edit/${facility.id}`}
                     style={{ marginRight: '8px' }}
                   >
                     Edit

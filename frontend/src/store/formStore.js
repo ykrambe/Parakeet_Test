@@ -4,7 +4,7 @@ import axios from "../lib/axios";
 
 const useFormStore = create((set) => ({
     facilities: [],
-    facility: [],
+    facility: {},
     loading: false,
     error: null,
     saveFacilityData: async (data) => {
@@ -39,7 +39,7 @@ const useFormStore = create((set) => ({
         try {
             const response = await axios.get(`/facilities/${id}`);
             console.log('Data fetched successfully by ID:', response.data);
-            return response.data;  // You can return the data for use in your components
+            set(({ facility: response.data.data[0] }));
         } catch (error) {
             console.error('Error fetching data by ID:', error);
             set({ error: error.response?.data?.message || 'Failed to fetch data' });

@@ -2,9 +2,11 @@
 import {Hono} from 'hono'
 import facilities from './routes/facilities'
 import { db } from './db';
+import { cors } from 'hono/cors'
 
 const app = new Hono()
 
+app.use(cors())
 app.route("/facilities", facilities)
 //main endpoint
 app.get("/", async (c:any) => {

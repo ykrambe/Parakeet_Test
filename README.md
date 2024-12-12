@@ -5,9 +5,9 @@
 - run with command npm start
 
 
-# how to run frontend
+# How to run frontend
 - change file .env.example to .env
-- run with command npm dev
+- run with command npm run dev
 
 # note
 - backend service is already deploy in https://parakeet-test-backend.ykrambe.workers.dev/
